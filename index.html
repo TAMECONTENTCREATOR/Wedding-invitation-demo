@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Κώστας & Μαρία</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #f3eee6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Georgia, serif;
+    overflow: hidden;
+}
+
+.scene {
+    width: 100%;
+    max-width: 430px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.envelope {
+    width: 88%;
+    height: 260px;
+    position: relative;
+    background: #fffdf9;
+    border-radius: 4px;
+    box-shadow: 0 20px 45px rgba(80,70,55,.18);
+}
+
+/* Το γράμμα */
+.letter {
+    position: absolute;
+    width: 82%;
+    height: 225px;
+    left: 9%;
+    top: 18px;
+    background: #fffaf3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    box-shadow: 0 4px 18px rgba(0,0,0,.10);
+
+    transform: translateY(0);
+    transition: transform 1.5s ease;
+}
+
+.letter-content {
+    opacity: 0;
+    transition: opacity 1s ease 1s;
+}
+
+.letter h1 {
+    font-size: 25px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    color: #555047;
+    margin-bottom: 14px;
+}
+
+.letter p {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #777168;
+}
+
+/* Πάνω μέρος φακέλου */
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 145px;
+
+    background: #fffdf9;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 100%
+    );
+
+    transform-origin: top center;
+    transition: transform 1.3s ease;
+
+    z-index: 5;
+}
+
+/* Βουλοκέρι */
+.seal {
+    position: absolute;
+
+    width: 72px;
+    height: 72px;
+
+    border-radius: 50%;
+
+    background: #6f7950;
+
+    color: #f5f0df;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    left: 50%;
+    top: 105px;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+
+    cursor: pointer;
+
+    font-size: 17px;
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 5px 12px rgba(0,0,0,.25),
+        inset 0 0 0 3px rgba(255,255,255,.08);
+
+    transition:
+        transform .4s ease,
+        opacity .5s ease;
+}
+
+.seal:hover {
+    transform: translateX(-50%) scale(1.06);
+}
+
+/* Άνοιγμα */
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+    transform: translateY(-145px);
+}
+
+.envelope.open .letter-content {
+    opacity: 1;
+}
+
+.envelope.open .seal {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Κείμενο */
+.instruction {
+    position: absolute;
+    bottom: 65px;
+
+    font-size: 11px;
+    letter-spacing: 2px;
+
+    color: #6f7950;
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+    <div class="envelope" id="envelope">
+
+        <div class="letter">
+
+            <div class="letter-content">
+
+                <h1>ΚΩΣΤΑΣ & ΜΑΡΙΑ</h1>
+
+                <p>
+                    WE ARE GETTING MARRIED
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="flap"></div>
+
+        <div class="seal" id="seal">
+            Κ & Μ
+        </div>
+
+    </div>
+
+    <div class="instruction">
+        ΠΑΤΗΣΤΕ ΤΟ ΒΟΥΛΟΚΕΡΙ
+    </div>
+
+</div>
+
+<script>
+
+const seal = document.getElementById("seal");
+const envelope = document.getElementById("envelope");
+
+seal.addEventListener("click", function() {
+
+    envelope.classList.add("open");
+
+});
+
+</script>
+
+</body>
+</html>
